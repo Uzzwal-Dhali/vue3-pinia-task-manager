@@ -36,17 +36,40 @@
       <div class="addTask" @click="showModal"><i class="material-icons">playlist_add</i></div>
     </header>
     <nav>
-      <button @click="filtered = 'all'" :class="filtered === 'all' ? 'active' : ''">All ({{ taskStore.total }})</button>
-      <button @click="filtered = 'favorite'" :class="filtered === 'favorite' ? 'active' : ''">Favorite ({{ taskStore.totalFavorite }})</button>
+      <button
+        @click="filtered = 'all'"
+        :class="filtered === 'all' ? 'active' : ''"
+      >
+        All ({{ taskStore.total }})
+      </button>
+      <button
+        @click="filtered = 'favorite'"
+        :class="filtered === 'favorite' ? 'active' : ''"
+      >
+        Favorite ({{ taskStore.totalFavorite }})
+      </button>
+      <button
+        @click="filtered = 'completed'"
+        :class="filtered === 'completed' ? 'active' : ''"
+      >
+        Completed ({{ taskStore.totalCompleted }})
+      </button>
     </nav>
+    <!-- All Tasks -->
     <div class="tasks" v-if="filtered === 'all'">
       <div v-for="task in taskStore.tasks" :key="task.id">
         <TaskDetails :task="task"/>
       </div>
     </div>
+    <!-- Favorite Tasks -->
     <div class="tasks" v-if="filtered === 'favorite'">
-      <!-- Favorite Tasks -->
       <div v-for="task in taskStore.favorite">
+        <TaskDetails :task="task"/>
+      </div>
+    </div>
+    <!-- Completed Tasks -->
+    <div class="tasks" v-if="filtered === 'completed'">
+      <div v-for="task in taskStore.completed">
         <TaskDetails :task="task"/>
       </div>
     </div>
@@ -65,6 +88,10 @@
 </template>
 
 <style lang="scss" scoped>
+  @font-face {
+    font-family: 'arista';
+    src: url('fonts/Arista_light.ttf');
+  }
   main {
     background: #fff;
     width: 90vw;
@@ -72,12 +99,14 @@
     padding: 1.5rem;
     border-radius: 1.2rem;
     header {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.75rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       h1 {
         font-size: 1.5rem;
+        font-family: 'arista';
+        color: rgb(0 0 0 / 50%);
       }
       .addTask {
         display: flex;

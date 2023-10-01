@@ -9,7 +9,13 @@
 
 <template>
   <div class="task">
-    <div class="title">{{ task.title }}</div>
+    <div
+      class="title"
+      :class="task.isCompleted ? 'completed' : ''"
+      @click="taskStore.toggleCompleted(task.id)"
+    >
+      {{ task.title }}
+    </div>
     <div class="actions">
       <div class="delete">
         <i
@@ -36,6 +42,12 @@
   .task {
     display: flex;
     justify-content: space-between;
+    .title {
+      cursor: pointer;
+    }
+    .completed {
+      color: rgb(38 48 55 / 40%);
+    }
     .actions {
       display: flex;
       gap: 0.25rem;

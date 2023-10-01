@@ -6,17 +6,20 @@ export const useTaskStore = defineStore('taskStore', {
       {
         id: 1,
         title: "Go to Apple Store",
-        isFavorite: false
+        isFavorite: false,
+        isCompleted: false,
       },
       {
         id: 2,
         title: "Buy an iPad",
-        isFavorite: true
+        isFavorite: true,
+        isCompleted: false,
       },
       {
         id: 3,
         title: "Get an Apple Pencil",
-        isFavorite: false
+        isFavorite: false,
+        isCompleted: true,
       }
     ],
     name: 'Uzzwal',
@@ -28,6 +31,14 @@ export const useTaskStore = defineStore('taskStore', {
     totalFavorite() {
       return this.tasks.reduce((previous, current) => {
         return current.isFavorite ? previous + 1 : previous
+      }, 0)
+    },
+    completed() {
+      return this.tasks.filter(t => t.isCompleted)
+    },
+    totalCompleted() {
+      return this.tasks.reduce((previous, current) => {
+        return current.isCompleted ? previous + 1 : previous
       }, 0)
     },
     total: (state) => {
@@ -46,6 +57,10 @@ export const useTaskStore = defineStore('taskStore', {
     toggleFavorite(id) {
       const task = this.tasks.find(t => t.id === id)
       task.isFavorite = !task.isFavorite
+    },
+    toggleCompleted(id) {
+      const task = this.tasks.find(t => t.id === id)
+      task.isCompleted = !task.isCompleted
     }
   }
 })
