@@ -16,7 +16,7 @@ export const useTaskStore = defineStore('taskStore', {
       {
         id: 3,
         title: "Get an Apple Pencil",
-        isFavorite: true
+        isFavorite: false
       }
     ],
     name: 'Uzzwal',
@@ -25,5 +25,18 @@ export const useTaskStore = defineStore('taskStore', {
     favorite() {
       return this.tasks.filter(t => t.isFavorite)
     },
+    totalFavorite() {
+      return this.tasks.reduce((previous, current) => {
+        return current.isFavorite ? previous + 1 : previous
+      }, 0)
+    },
+    total: (state) => {
+      return state.tasks.length
+    }
   },
+  actions: {
+    addTask(task) {
+      this.tasks.push(task)
+    }
+  }
 })

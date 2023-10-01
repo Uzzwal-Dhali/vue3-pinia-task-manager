@@ -13,8 +13,8 @@
       <h1>{{ taskStore.name }}'s Tasks</h1>
     </header>
     <nav>
-      <button @click="filtered = 'all'" :class="filtered === 'all' ? 'active' : ''">All</button>
-      <button @click="filtered = 'favorite'" :class="filtered === 'favorite' ? 'active' : ''">Favorite</button>
+      <button @click="filtered = 'all'" :class="filtered === 'all' ? 'active' : ''">All ({{ taskStore.total }})</button>
+      <button @click="filtered = 'favorite'" :class="filtered === 'favorite' ? 'active' : ''">Favorite ({{ taskStore.totalFavorite }})</button>
     </nav>
 
     <div class="tasks" v-if="filtered === 'all'">
@@ -39,27 +39,31 @@
     padding: 1.5rem;
     border-radius: 1.2rem;
     header {
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.25rem;
       h1 {
         font-size: 1.5rem;
       }
     }
     nav {
       display: flex;
-      gap: 0.1rem;
-      margin-bottom: 0.5rem;
+      gap: 0.15rem;
+      margin-bottom: 0.65rem;
       button {
+        font-weight: 500;
         padding: 0.2rem 0.75rem;
-        background: rgb(0 0 0 / 15%);
+        background: rgb(0 0 0 / 35%);
         border: none;
         border-radius: 0.25rem;
         cursor: pointer;
+        color: white;
+        transition: background 0.5s ease-in-out;
       }
       button:hover {
-        background: rgb(83 197 217 / 50%);
+        background: rgb(255 145 145 / 100%);
       }
       .active {
-        background: rgb(83 197 217 / 50%);
+        background: rgb(255 145 145 / 100%);
+
       }
     }
     .tasks {
