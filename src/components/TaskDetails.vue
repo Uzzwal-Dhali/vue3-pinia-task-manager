@@ -1,4 +1,7 @@
 <script setup>
+  import { useTaskStore } from '../stores/TaskStore';
+
+  const taskStore = useTaskStore()
   defineProps({
     task: 'task'
   })
@@ -9,10 +12,21 @@
     <div class="title">{{ task.title }}</div>
     <div class="actions">
       <div class="delete">
-        <i class="material-icons">delete</i>
+        <i
+          class="material-icons"
+          @click="taskStore.deleteTask(task.id)"
+        >
+          delete
+        </i>
       </div>
       <div class="react">
-        <i class="material-icons" :class="task.isFavorite ? 'favorite' : ''">favorite</i>
+        <i
+          class="material-icons"
+          :class="task.isFavorite ? 'favorite' : ''"
+          @click="taskStore.toggleFavorite(task.id)"
+        >
+          favorite
+        </i>
       </div>
     </div>
   </div>
