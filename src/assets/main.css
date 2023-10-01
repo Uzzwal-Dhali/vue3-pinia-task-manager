@@ -1,0 +1,15 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  background: rgb(38 48 55 / 90%);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  color: rgb(38 48 55 / 80%);
+}
